@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { PrismaClientExceptionFilter } from './prisma/prisma.filter';
 
+const PORT = process.env.PORT || 3000;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new PrismaClientExceptionFilter());
@@ -17,8 +18,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  await app.listen(3000);
-  console.log('API rodando em http://localhost:3000');
-  console.log('Swagger disponível em http://localhost:3000/api-docs');
+  await app.listen(PORT);
+  console.log(`API rodando em http://localhost:${PORT}`);
+  console.log(`Swagger disponível em http://localhost:${PORT}/api-docs`);
 }
 bootstrap();
