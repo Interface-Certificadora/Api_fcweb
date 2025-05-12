@@ -23,7 +23,22 @@ export class FcwebService {
 
   findAll() {
     try {
-      const fcweb = this.prisma.fcweb.findMany();
+      const fcweb = this.prisma.fcweb.findMany({
+        orderBy: {
+          id: 'desc',
+        },
+        take: 300,
+        select: {
+          id: true,
+          nome: true,
+          razaosocial: true,
+          andamento: true,
+          criou_fc: true,
+          formapgto: true,
+          estatos_pgto: true,
+          valorcd: true,
+        },
+      });
       return fcweb;
     } catch (error) {
       throw new HttpException(
