@@ -1,9 +1,6 @@
 # Use the latest Node.js image as the base image
 FROM node:20.17.0
 
-# atualizar imagem do git
-RUN git pull origin main
-
 # Set the working directory
 WORKDIR /app
 # Copy the package.json and package-lock.json files
