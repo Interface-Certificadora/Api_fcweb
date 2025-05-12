@@ -25,7 +25,7 @@ RUN npx prisma generate
 RUN yarn build
 
 # Expose the port the app runs on
-EXPOSE 7877
+EXPOSE 7878
 
 # Start the application
 CMD ["yarn", "start"]
