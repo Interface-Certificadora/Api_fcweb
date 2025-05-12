@@ -5,7 +5,7 @@ import { ApiProperty } from '@nestjs/swagger';
  * Baseada no model Prisma 'fcweb'.
  * Utilizada para respostas e mapeamento de dados.
  */
-export class Fcweb {
+export class FcwebEntity {
   /** Identificador único (chave primária) */
   @ApiProperty({ example: 1 })
   id: number;
