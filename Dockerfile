@@ -1,6 +1,9 @@
 # Use the latest Node.js image as the base image
 FROM node:20.17.0
 
+# atualizar imagem do git
+RUN git pull origin main
+
 # Set the working directory
 WORKDIR /app
 # Copy the package.json and package-lock.json files
@@ -25,7 +28,8 @@ RUN npx prisma generate
 RUN yarn build
 
 # Expose the port the app runs on
-EXPOSE 7878
+#buscar a porta no arquivo .env
+EXPOSE $PORT
 
 # Start the application
 CMD ["yarn", "start"]
