@@ -13,12 +13,33 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('API FCWeb')
     .setDescription(
-      'Documentação automática da API FCWeb, gerada com Swagger.\n\nPara autenticação é obrigatório usar Basic Auth com usuario e senha\n\nProdução: https://apifcweb.redebrasilrp.com.br\n\nDesenvolvimento: http://localhost:7879',
+      'Documentação da API FCWeb\n\n' +
+        'Bem-vindo à documentação automática da API FCWeb, gerada com Swagger.\n\n' +
+        '🔐 Autenticação\n\n' +
+        'Esta API utiliza autenticação do tipo Basic Auth. Para acessar os endpoints protegidos, é obrigatório enviar um cabeçalho "Authorization" com suas credenciais codificadas.\n\n' +
+        'Como autenticar:\n\n' +
+        '1. Combine seu usuário e senha separados por dois-pontos:\n' +
+        '   usuario:senha\n\n' +
+        '2. Codifique essa string em Base64.</br> Exemplo:</br>' +
+        '   <code>usuario:senha → dXN1YXJpbzpzZW5oYQ==</code>\n\n' +
+        '3. Envie o seguinte cabeçalho na requisição:</br>' +
+        '   <code>Authorization: Basic dXN1YXJpbzpzZW5oYQ==</code>\n\n' +
+        'Exemplo com curl:\n\n' +
+        '<code>curl -X GET https://sua-api.com/exemplo \\\n' +
+        '  -H "Authorization: Basic dXN1YXJpbzpzZW5oYQ=="</code>\n\n' +
+        '💡 Dica: No Swagger UI, clique no botão "Authorize" no topo da página, insira seu usuário e senha, e as requisições já incluirão o cabeçalho automaticamente.\n\n' +
+        '🌐 Ambientes disponíveis:\n\n' +
+        '- Produção: <code>https://apifcweb.redebrasilrp.com.br</code>\n' +
+        '- Desenvolvimento: <code>http://localhost:7879</code>',
     )
     .setVersion('1.0')
     .addServer(`https://apifcweb.redebrasilrp.com.br`, 'Produção')
-    .addServer(`http://localhost:7879`, 'Desenvolvimento')
-    .addBasicAuth()
+    // .addServer(`http://localhost:7879`, 'Desenvolvimento')
+    .addBasicAuth({
+      type: 'http',
+      name: 'Basic',
+      description: 'Basic Auth',
+    })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
