@@ -187,4 +187,24 @@ export class CreateImportDadosDto {
   @IsOptional()
   @IsString()
   dtnascimento?: string;
+
+  /** Link da foto */
+  @ApiProperty({
+    description: 'Url da foto',
+    example: 'https://exemplo.com/foto.jpg',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  linkFoto?: string;
+
+  /** Link do vídeo */
+  @ApiProperty({
+    description: 'Url do vídeo ou foto coletor facial',
+    example: 'https://exemplo.com/video.mp4',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  linkVideo?: string;
 }

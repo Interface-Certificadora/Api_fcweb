@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -333,6 +332,9 @@ model fcweb {
   updatedAt           DateTime?
   id_agendamento      Int?
   dt_revogacao        DateTime?      @db.DateTime(0)
+  linkVideo           String?        @db.Text
+  linkFoto            String?        @db.Text
+  notificacoes        Int?           @default(0)
   agendamentos        agendamentos[]
   price_cert          price_cert[]
 
@@ -878,6 +880,16 @@ model voucher {
   dt_resgate   DateTime? @db.DateTime(0)
   id_fcw       String    @db.VarChar(150)
   dt_aprovacao DateTime  @db.Date
+}
+
+model log_envio_whatsapp {
+  id            Int       @id @default(autoincrement())
+  id_fcweb      Int
+  telefone      String    @db.VarChar(20)
+  data_agendada DateTime? @db.Date
+  hora_agendada DateTime? @db.Time(0)
+  mensagem      String?   @db.Text
+  enviado_em    DateTime? @default(now()) @db.DateTime(0)
 }
 
 enum agente_disponibilidade_dia_semana {
